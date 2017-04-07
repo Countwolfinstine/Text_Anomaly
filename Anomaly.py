@@ -35,6 +35,8 @@ def fetch_tweets():
 	f.close()
 	return l
 
+#This function removes the Unrelated tweets from the data set using TF/IDF. 
+#It uses 1.5 IQR technique to identify the outliers and remove them from the data set. 
 def removeTfIdf():
 	arr1=[]	
 	temp_sentences = []
@@ -95,6 +97,7 @@ def removeTfIdf():
 	print(len(l1))
 	return l1
 
+# Hostility Factor is the ratio of number of hostile words to total number of words in given sentence, in this case a tweet.
 def hostilityfactor(x):
 	count=0;
 	for i in x:	
@@ -108,6 +111,8 @@ def hostilityfactor(x):
 			x.remove(i)	
 	frac = float(count)/float(len(x))
 	return frac	
+
+# This function extracts the top 0.05 percentage of most hostile tweets from the data set.
 def Hostile():
 	hos=[]
 	top=0;
@@ -135,6 +140,7 @@ if __name__=='__main__':
 		
 
 	stop = set(stopwords.words('english'))
+	
 	Hostile()
 	sid = SentimentIntensityAnalyzer()
 
@@ -153,7 +159,6 @@ if __name__=='__main__':
 	#most negative
 	print(sentences[ sentiments.index(sorted(sentiments)[0])] , sorted(sentiments)[0])
 
-
 	print "-----------------------------------"
 
 	#most positive
@@ -164,34 +169,3 @@ if __name__=='__main__':
 	for i in range(len(sentiments)):
 		f.write(str(sentiments[i]))
 		f.write('\n')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
